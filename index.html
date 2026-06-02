@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paulina Erin Quinn</title>
+<meta name="description" content="AI strategy operator & founding-team builder. Eight years at Google across AI, privacy, and trust systems at billion-user scale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0e0d;
+    --ink-mid: #3a3732;
+    --ink-light: #8c8880;
+    --paper: #f5f2ee;
+    --paper-warm: #ede9e3;
+    --accent: #b5622a;
+    --accent-light: #d4845048;
+    --rule: #d4cfc8;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-mono: 'DM Mono', monospace;
+    --font-body: 'Outfit', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mix-blend-mode: multiply;
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--ink-mid);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+  }
+
+  .hero-left {
+    padding: 12rem 4rem 6rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 300;
+    line-height: 1.0;
+    color: var(--ink);
+    margin-bottom: 0.2em;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink-mid);
+  }
+
+  .hero-tagline {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 1.6vw, 1.35rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-mid);
+    line-height: 1.5;
+    margin-top: 1.8rem;
+    max-width: 420px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .btn-primary {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.85rem 1.8rem;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--accent); }
+
+  .btn-secondary {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .btn-secondary:hover { color: var(--accent); border-color: var(--accent); }
+
+  .hero-right {
+    padding: 12rem 3rem 6rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--paper-warm);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-right::before {
+    content: '"';
+    position: absolute;
+    top: 4rem;
+    right: 2rem;
+    font-family: var(--font-display);
+    font-size: 18rem;
+    color: var(--rule);
+    line-height: 1;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .credential-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .credential-item {
+    padding: 1.6rem 0;
+    border-bottom: 1px solid var(--rule);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .credential-item:nth-child(1) { animation-delay: 0.5s; }
+  .credential-item:nth-child(2) { animation-delay: 0.65s; }
+  .credential-item:nth-child(3) { animation-delay: 0.8s; }
+  .credential-item:nth-child(4) { animation-delay: 0.95s; }
+
+  .credential-item:first-child { border-top: 1px solid var(--rule); }
+
+  .credential-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .credential-text {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .credential-sub {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--ink-light);
+    margin-top: 0.2rem;
+  }
+
+  /* ── SECTION SHARED ── */
+  section {
+    padding: 7rem 3rem;
+    position: relative;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ── ABOUT ── */
+  .about { background: var(--ink); }
+
+  .about .section-label { color: var(--accent); }
+  .about .section-label::after { background: #3a3732; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--paper);
+  }
+
+  .about-headline em { font-style: italic; color: var(--accent); }
+
+  .about-body {
+    font-size: 0.95rem;
+    color: #a09890;
+    line-height: 1.8;
+  }
+
+  .about-body p + p { margin-top: 1.2rem; }
+
+  /* ── EXPERTISE ── */
+  .expertise { background: var(--paper-warm); }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .expertise-card {
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.2s;
+  }
+
+  .expertise-card:hover { background: var(--paper); }
+  .expertise-card:nth-child(3n) { border-right: none; }
+  .expertise-card:nth-child(n+4) { border-bottom: none; }
+
+  .expertise-number {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.2rem;
+  }
+
+  .expertise-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .expertise-desc {
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+
+  /* ── SELECTED WORK ── */
+  .work { background: var(--paper); }
+
+  .work-items { display: flex; flex-direction: column; gap: 0; }
+
+  .work-item {
+    display: grid;
+    grid-template-columns: 200px 1fr 160px;
+    gap: 3rem;
+    align-items: baseline;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--rule);
+    cursor: default;
+    transition: padding-left 0.3s;
+  }
+
+  .work-item:first-child { border-top: 1px solid var(--rule); }
+  .work-item:hover { padding-left: 1rem; }
+
+  .work-org {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+
+  .work-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .work-title em { font-style: italic; color: var(--ink-mid); font-size: 0.9rem; }
+
+  .work-years {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--ink-light);
+    text-align: right;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── CONTACT ── */
+  .contact { background: var(--paper-warm); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .contact-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .contact-headline em { font-style: italic; color: var(--accent); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+
+  .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .form-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+
+  .form-input, .form-textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--rule);
+    padding: 0.6rem 0;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+  .form-textarea { resize: none; height: 80px; }
+
+  .form-submit {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    border: none;
+    padding: 0.9rem 2rem;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover { background: var(--accent); }
+
+  .contact-links {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .contact-link {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-mid);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: color 0.2s;
+  }
+
+  .contact-link::before {
+    content: '→';
+    color: var(--accent);
+    font-size: 0.7rem;
+  }
+
+  .contact-link:hover { color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-name {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #5a5550;
+  }
+
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: #3a3530;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 9rem 1.5rem 3rem; border-right: none; border-bottom: 1px solid var(--rule); }
+    .hero-right { padding: 3rem 1.5rem 5rem; }
+    .hero-right::before { font-size: 10rem; }
+
+    .about-grid,
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+    .expertise-grid { grid-template-columns: 1fr 1fr; }
+    .expertise-card:nth-child(3n) { border-right: 1px solid var(--rule); }
+    .expertise-card:nth-child(2n) { border-right: none; }
+
+    .work-item { grid-template-columns: 1fr; gap: 0.4rem; padding: 1.5rem 0; }
+    .work-years { text-align: left; }
+
+    section { padding: 4rem 1.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  }
+
+  @media (max-width: 560px) {
+    .expertise-grid { grid-template-columns: 1fr; }
+    .expertise-card:nth-child(n) { border-right: none; border-bottom: 1px solid var(--rule); }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Paulina Quinn</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="top">
+  <div class="hero-left">
+    <p class="hero-eyebrow">AI Strategy · Operator · Founder</p>
+    <h1 class="hero-name">Paulina<br><em>Erin Quinn</em></h1>
+    <p class="hero-tagline">Bridging technical systems, global regulation, and product at billion-user scale — now building what's next.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Get in touch</a>
+      <a href="#work" class="btn-secondary">See my work</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <ul class="credential-list">
+      <li class="credential-item">
+        <div class="credential-label">Current</div>
+        <div class="credential-text">Founder, The Loon Lounge</div>
+        <div class="credential-sub">Short-term rental portfolio · Maine</div>
+      </li>
+      <li class="credential-item">
+        <div class="credential-label">Previously</div>
+        <div class="credential-text">Global PMM, AI & Privacy</div>
+        <div class="credential-sub">Google · New York & Hamburg · 8 years</div>
+      </li>
+      <li class="credential-item">
+        <div class="credential-label">Education</div>
+        <div class="credential-text">World Bachelor in Business</div>
+        <div class="credential-sub">USC Marshall · Bocconi · HKUST · Magna Cum Laude</div>
+      </li>
+      <li class="credential-item">
+        <div class="credential-label">Languages</div>
+        <div class="credential-text">German · English · Spanish · Italian</div>
+        <div class="credential-sub">Native in two. Conversational in two more.</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <p class="section-label">About</p>
+    <div class="about-grid">
+      <h2 class="about-headline">Where strategy <em>meets</em> the moment of execution</h2>
+      <div class="about-body">
+        <p>Eight years at Google navigating the intersection of AI capability, regulatory risk, and user trust — at a scale where getting it wrong has real consequences. I've rewritten global messaging strategy during an antitrust trial, translated GDPR and Schrems II into product requirements for infrastructure used by billions, and convened 160+ Fortune 500 CMOs to shape how enterprise AI actually gets adopted.</p>
+        <p>I'm German-American, educated across three continents, and fluent in the languages of both engineering teams and C-suites. I come alive in small rooms with high stakes — where decisions are visible, the map is changing, and the work requires both strategic clarity and hands-on execution.</p>
+        <p>I'm now building toward founding-team and operator roles at AI-native startups, and exploring early-stage investment in responsible technology.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERTISE ── -->
+<section class="expertise" id="expertise">
+  <div class="section-inner">
+    <p class="section-label">Expertise</p>
+    <div class="expertise-grid">
+      <div class="expertise-card">
+        <div class="expertise-number">01</div>
+        <div class="expertise-title">AI Strategy & Enterprise Adoption</div>
+        <div class="expertise-desc">Translating frontier model capabilities into applied business contexts — for Fortune 500 CMOs, product teams, and boards navigating the agent era.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-number">02</div>
+        <div class="expertise-title">Regulatory Translation → Product</div>
+        <div class="expertise-desc">Converting GDPR, CPRA, Schrems II, and emerging AI regulation into product and go-to-market requirements — without losing the business in the process.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-number">03</div>
+        <div class="expertise-title">Crisis Execution</div>
+        <div class="expertise-desc">Rewriting global strategy in real time under extreme pressure. Antitrust trials. COVID response programs launched in under two weeks. Elections with 100M+ users.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-number">04</div>
+        <div class="expertise-title">Cross-functional Leadership</div>
+        <div class="expertise-desc">Partnering across 400+ engineers, legal, communications, and C-suite — coordinating across 10+ products simultaneously to ship things that matter.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-number">05</div>
+        <div class="expertise-title">Go-to-Market for Complex Products</div>
+        <div class="expertise-desc">Building narrative and launch strategy for technically complex, politically sensitive, billion-user products where the wrong framing has real consequences.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-number">06</div>
+        <div class="expertise-title">Operating & Capital Decisions</div>
+        <div class="expertise-desc">Full P&L ownership, vendor management, and capital allocation in a real business — not just strategy decks, but decisions with money on the line.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SELECTED WORK ── -->
+<section class="work" id="work">
+  <div class="section-inner">
+    <p class="section-label">Selected Work</p>
+    <div class="work-items">
+      <div class="work-item">
+        <div class="work-org">Google</div>
+        <div class="work-title">CMO AI Labs <em>— Convening 160+ Fortune 500 CMOs on enterprise AI adoption. 100% CSAT. Hundreds of millions in Cloud pipeline.</em></div>
+        <div class="work-years">2023 – 2025</div>
+      </div>
+      <div class="work-item">
+        <div class="work-org">Google</div>
+        <div class="work-title">U.S. Antitrust Trial <em>— Embedded with legal & comms. Rewrote global messaging strategy in real time under direct regulatory consequence.</em></div>
+        <div class="work-years">2024</div>
+      </div>
+      <div class="work-item">
+        <div class="work-org">Google</div>
+        <div class="work-title">Ad Data & Privacy Commitments <em>— Translated GDPR + Schrems II into product requirements for ad infrastructure used by billions.</em></div>
+        <div class="work-years">2022 – 2024</div>
+      </div>
+      <div class="work-item">
+        <div class="work-org">Google</div>
+        <div class="work-title">German Federal Election Response <em>— Coordinated 10+ products to deliver real-time information to 100M+ users. Playbook adopted across APAC & EMEA.</em></div>
+        <div class="work-years">2021</div>
+      </div>
+      <div class="work-item">
+        <div class="work-org">Google</div>
+        <div class="work-title">Safer with Google Campaign <em>— €7.5M privacy campaign. +11ppt lift in safety perception. Scaled globally.</em></div>
+        <div class="work-years">2020 – 2022</div>
+      </div>
+      <div class="work-item">
+        <div class="work-org">The Loon Lounge</div>
+        <div class="work-title">Short-Term Rental Portfolio <em>— Co-founded and operate a lakefront STR business in Maine. Full P&L, pricing, and capital decisions.</em></div>
+        <div class="work-years">2021 – Present</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <p class="section-label">Contact</p>
+    <div class="contact-grid">
+      <div>
+        <h2 class="contact-headline">Let's build something <em>worth building.</em></h2>
+        <div class="contact-links">
+          <a href="mailto:quinnpaulina@gmail.com" class="contact-link">quinnpaulina@gmail.com</a>
+          <a href="tel:+16504709752" class="contact-link">+1 650 470 9752</a>
+          <a href="https://linkedin.com/in/paulinaquinn" target="_blank" class="contact-link">LinkedIn</a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-field">
+          <label class="form-label" for="name">Name</label>
+          <input class="form-input" type="text" id="name" placeholder="Your name" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="message">Message</label>
+          <textarea class="form-textarea" id="message" placeholder="What are you working on?" required></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="submit-btn">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-name">Paulina Erin Quinn · paulinaquinn.com</span>
+  <span class="footer-copy">© 2026</span>
+</footer>
+
+<script>
+  // Smooth nav scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // Form handler
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sent ✓';
+    btn.style.background = '#2d6a4f';
+    setTimeout(() => {
+      btn.textContent = 'Send message';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) { el.target.style.opacity = '1'; el.target.style.transform = 'translateY(0)'; }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.expertise-card, .work-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
